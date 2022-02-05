@@ -1,16 +1,36 @@
 package hellojpa;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-// @Table(name = "USER")
 public class Member {
     @Id
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
-//    @Column(name = "userName")
-    private String name;
+
+    @Column(name = "name", nullable = false)
+    private String username;
+
+//    @Column(name = "TEAM_ID")
+//    private Long teamId;
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+
+    public Member(){
+
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
+    }
 
     public Long getId() {
         return id;
@@ -20,11 +40,12 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
 }
