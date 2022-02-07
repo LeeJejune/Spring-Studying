@@ -1,21 +1,15 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-public class Team extends BaseEntity{
-    @Id
-    @GeneratedValue
-    @Column(name = "TEAM_ID")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn
+public abstract class item {
+    @Id @GeneratedValue
     private Long id;
     private String name;
-
-
-    public void Team(){
-
-    }
+    private int price;
 
     public Long getId() {
         return id;
@@ -33,4 +27,11 @@ public class Team extends BaseEntity{
         this.name = name;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }
