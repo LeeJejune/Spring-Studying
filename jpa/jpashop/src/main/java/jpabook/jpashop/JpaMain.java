@@ -1,5 +1,6 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Book;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 
@@ -17,14 +18,6 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-            Order order = new Order();
-            order.addOrderItem(new OrderItem());
-
-            // 위 코드랑 같은 의미
-//            OrderItem orderitem = new OrderItem();
-//            orderitem.setOrder(order);
-//            em.persist(orderitem);
-
             tx.commit();
 
         } catch (Exception e){
