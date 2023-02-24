@@ -1,6 +1,6 @@
 package com.jpa.projection.service.user;
 
-import com.jpa.projection.Exception.NotFoundException;
+import com.jpa.projection.exception.NotFoundException;
 import com.jpa.projection.domain.user.UserRepository;
 import com.jpa.projection.service.user.response.UserPostResponse;
 import lombok.RequiredArgsConstructor;

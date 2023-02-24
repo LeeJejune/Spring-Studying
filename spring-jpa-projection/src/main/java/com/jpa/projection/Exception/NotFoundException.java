@@ -1,4 +1,4 @@
-package com.jpa.projection.Exception;
+package com.jpa.projection.exception;
 
 public class NotFoundException extends RuntimeException {
 
