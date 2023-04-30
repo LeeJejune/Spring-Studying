@@ -1,0 +1,11 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0.27
+    platform: linux/amd64
+    container_name: demo
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: demo
