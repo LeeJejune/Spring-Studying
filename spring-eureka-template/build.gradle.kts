@@ -13,7 +13,7 @@ java {
 
 allprojects {
 
-	group = "com.realworld"
+	group = "com.jjlee"
 	version = "0.0.1-SNAPSHOT"
 
 	repositories {

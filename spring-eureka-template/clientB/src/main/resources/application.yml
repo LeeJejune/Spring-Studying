@@ -1,13 +1,13 @@
 server:
-  port: 0 # 랜덤포트
+  port: 9092 # 랜덤포트
 
 spring:
   application:
-    name: api-client # 서비스 이름
+    name: api-client-B # 서비스 이름
 
 eureka:
   instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    instance-id: ${spring.application.name}:${spring.application.instance_id:9092}
     hostname: localhost
   client:
     register-with-eureka: true
