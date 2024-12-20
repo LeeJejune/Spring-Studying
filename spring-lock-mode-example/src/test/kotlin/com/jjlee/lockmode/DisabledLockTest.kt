@@ -7,7 +7,7 @@ import io.kotest.matchers.shouldBe
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 
-class UpdateProductCountWithDisabledLockTest(
+class DisabledLockTest(
     private val productRepository: ProductRepository,
     private val productService: ProductService
 ) : DefaultTest() {
