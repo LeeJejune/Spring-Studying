@@ -1,0 +1,29 @@
+logging:
+    level:
+      org:
+        springframework: DEBUG
+        hibernate:
+          orm:
+            jdbc:
+              bind: trace
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowType: COUNT_BASED # 작동 방식
+        slidingWindowSize: 10 # 슬라이딩 윈도우 크기
+        failureRateThreshold: 50 # 실패율 임계값
+        permittedNumberOfCallsInHalfOpenState: 5 # half-open 상태에서 허용되는 호출 수
+        registerHealthIndicator: true # health indicator 등록 여부
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*" # 테스트를 위해 actuator 전체 노출
+
+  health:
+    circuitbreakers:
+      enabled: true # circuitbreakers 정보 노출
