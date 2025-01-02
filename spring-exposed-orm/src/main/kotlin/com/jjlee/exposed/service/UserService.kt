@@ -1,7 +1,7 @@
 package com.jjlee.exposed.service
 
-import com.jjlee.exposed.domain.City
-import com.jjlee.exposed.domain.User
+import com.jjlee.exposed.domain.Cities
+import com.jjlee.exposed.domain.Users
 import com.jjlee.exposed.dto.request.UserCreateRequest
 import com.jjlee.exposed.dto.response.CityResponse
 import com.jjlee.exposed.dto.response.UserResponse
@@ -20,18 +20,18 @@ class UserService {
     fun findUserById(id: Long): UserResponse {
         val user = transaction {
             addLogger(StdOutSqlLogger)
-            (User leftJoin City).selectAll().where { User.id eq id }.firstOrNull()
+            (Users leftJoin Cities).selectAll().where { Users.id eq id }.firstOrNull()
         }
 
         return if (user != null) {
             UserResponse(
-                id = user[User.id].value,
-                name = user[User.name],
+                id = user[Users.id].value,
+                name = user[Users.name],
                 city = CityResponse(
-                    id = user[User.cityId].value,
-                    name = user[City.name],
-                    state = user[City.state],
-                    country = user[City.country]
+                    id = user[Users.cityId].value,
+                    name = user[Cities.name],
+                    state = user[Cities.state],
+                    country = user[Cities.country]
                 )
             )
         } else {
@@ -43,17 +43,17 @@ class UserService {
     fun create(request: UserCreateRequest): Long {
         return transaction {
             addLogger(StdOutSqlLogger)
-            val city = City.selectAll().where { City.id eq request.cityId }.firstOrNull()
+            val city = Cities.selectAll().where { Cities.id eq request.cityId }.firstOrNull()
                 ?: throw IllegalArgumentException("City not found")
-            val userId =  User.insertAndGetId {
+            val userId =  Users.insertAndGetId {
                 it[name] = request.name
-                it[cityId] = city[City.id]
+                it[cityId] = city[Cities.id]
             }
             userId.value
         }
     }
 
     fun delete(id: Long) {
-        User.deleteWhere { User.id eq id }
+        Users.deleteWhere { Users.id eq id }
     }
 }

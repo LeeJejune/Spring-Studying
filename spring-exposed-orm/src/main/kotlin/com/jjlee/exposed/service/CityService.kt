@@ -1,6 +1,6 @@
 package com.jjlee.exposed.service
 
-import com.jjlee.exposed.domain.City
+import com.jjlee.exposed.domain.Cities
 import com.jjlee.exposed.dto.request.CityCreateRequest
 import com.jjlee.exposed.dto.response.CityResponse
 import org.jetbrains.exposed.sql.StdOutSqlLogger
@@ -16,7 +16,7 @@ class CityService {
     fun create(request: CityCreateRequest) : Long {
         return transaction {
             addLogger(StdOutSqlLogger)
-            val id = City.insertAndGetId {
+            val id = Cities.insertAndGetId {
                 it[name] = request.name
                 it[state] = request.state
                 it[country] = request.country
@@ -28,14 +28,14 @@ class CityService {
     fun getCityById(id: Long) : CityResponse {
         val city= transaction {
             addLogger(StdOutSqlLogger)
-            City.selectAll().where { City.id eq id }.firstOrNull()
+            Cities.selectAll().where { Cities.id eq id }.firstOrNull()
         }
         if (city != null) {
             return CityResponse(
-                id = city[City.id].value,
-                name = city[City.name],
-                state = city[City.state],
-                country = city[City.country]
+                id = city[Cities.id].value,
+                name = city[Cities.name],
+                state = city[Cities.state],
+                country = city[Cities.country]
             )
         } else {
             throw IllegalArgumentException("City not found")
